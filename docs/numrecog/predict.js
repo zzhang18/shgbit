@@ -14,7 +14,7 @@ let model;
 	console.log('loading model');
 	// model = await tf.loadModel("http://localhost:81/tfjs-models/Num/model.json");
 	// model = await tf.loadLayersModel('/tfjs-models/Num/model.json');
-	model = await tf.loadLayersModel('https://zzhang18.github.io/shgbit/numrecog');
+	model = await tf.loadLayersModel('https://zzhang18.github.io/shgbit/numrecog/tfjs-models/Num/model.json');
 	model.summary();
 	await model.compile({
 		optimizer: 'adam',
