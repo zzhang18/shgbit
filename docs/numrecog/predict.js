@@ -13,8 +13,8 @@ let model;
 (async function () {
 	console.log('loading model');
 	// model = await tf.loadModel("http://localhost:81/tfjs-models/Num/model.json");
-	model = await tf.loadLayersModel(
-    '/tfjs-models/Num/model.json');
+	// model = await tf.loadLayersModel('/tfjs-models/Num/model.json');
+	model = await tf.loadLayersModel('https://zzhang18.github.io/shgbit/numrecog');
 	model.summary();
 	await model.compile({
 		optimizer: 'adam',
