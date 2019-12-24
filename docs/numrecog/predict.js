@@ -10,16 +10,29 @@ $("#image-selector").change(function () {
 }); 
 
 let model;
+$(".progress-bar").hide();
+
+
 (async function () {
 	console.log('loading model');
-	// model = await tf.loadModel("http://localhost:81/tfjs-models/Num/model.json");
-	// model = await tf.loadLayersModel('/tfjs-models/Num/model.json');
-	model = await tf.loadLayersModel('https://zzhang18.github.io/shgbit/numrecog/tfjs-models/Num/model.json');
+	$(".progress-bar").show();
+	// model = await tf.loadModel("http://localhost:81/tfjs-models/mnist/model.json");
+	// model = await tf.loadLayersModel('/tfjs-models/mnist/model.json');
+	model = await tf.loadLayersModel('https://zzhang18.github.io/shgbit/numrecog/tfjs-models/mnist/model.json');
+
 	model.summary();
+
+	// await model.compile({
+	// 	optimizer: 'adam',
+	// 	loss: 'sparseCategoricalCrossentropy',
+	// 	metrics: ['accuracy']
+	// });
+
+	const optimizer = 'rmsprop';
 	await model.compile({
-		optimizer: 'adam',
-		loss: 'sparseCategoricalCrossentropy',
-		metrics: ['accuracy']
+  optimizer: optimizer,
+  loss: 'categoricalCrossentropy',
+  metrics: ['accuracy'],
 	});
 	// await model.predict(tf.tensor2d(extract()).reshape([1, 28, 28, 1]));
 	console.log('loaded');
@@ -27,6 +40,27 @@ let model;
 	
 })();
 
+
+
+$("#load-button").click(async function(){
+	$(".progress-bar").show();
+	const jsonUpload = document.getElementById('model');
+	const weightsUpload = document.getElementById('weights');
+	model = await tf.loadLayersModel(
+	tf.io.browserFiles([jsonUpload.files[0], weightsUpload.files[0]]));
+	model.summary();
+
+	const optimizer = 'rmsprop';
+	await model.compile({
+  optimizer: optimizer,
+  loss: 'categoricalCrossentropy',
+  metrics: ['accuracy'],
+	});
+	// await model.predict(tf.tensor2d(extract()).reshape([1, 28, 28, 1]));
+	console.log('loaded');
+	$(".progress-bar").hide();
+
+});
 
 $("#predict-button").click(async function(){
     
@@ -37,14 +71,15 @@ $("#predict-button").click(async function(){
 		.toFloat()
 		.expandDims();
 
-
+	// console.log('tensor',tensor);
+	// .print();
+	console.log('input',tensor.dataSync());
 	// More pre-processing to be added here later
 
 	let predictions = await model.predict(tensor.reshape([1, 28, 28, 1]));
-	console.log(predictions);
-	let result1 = Array.from(predictions.argMax(1).dataSync());
+	console.log('predictions',predictions);
 	let result = Array.from(predictions.argMax(1).dataSync());
-	console.log(result1);
+	console.log('result',result);
 	$("#prediction-list").empty();
 	$("#prediction-list").append(`<p>Result: ${result[0]}</p>`);
 	// let predictions = await model.predict(tensor).data();
