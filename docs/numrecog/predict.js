@@ -6,7 +6,7 @@ $(".progress-bar").hide();
 	$(".progress-bar").show();
 	// model = await tf.loadModel("http://localhost:81/tfjs-models/mnist/model.json");
 	// model = await tf.loadLayersModel('/tfjs-models/mnist/model.json');
-	model = await tf.loadLayersModel('https://zzhang18.github.io/shgbit/numrecog/tfjs-models/mnist/model.json');
+	model = await tf.loadLayersModel('https://zzhang18.github.io/sgb/numrecog/tfjs-models/mnist/model.json');
 	model.summary();
 
 	await model.compile({
