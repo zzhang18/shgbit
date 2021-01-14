@@ -1,0 +1,18 @@
+<view class="intro">
+  <view>
+    <text class="text">Test video conference with link</text>
+    <button bindtap="onItemClick">Open Chrome</button>
+  </view>
+  <view>
+    <text class="text">User nickname: {{user.nickName}}</text>
+  </view>
+  <view>
+    <text class="text">User email: {{user.email}}</text>
+  </view>
+  <view>
+    <text class="text">Meeting: {{meetingId}}</text>
+  </view>
+  <view>
+    <text class="text">Url: {{finalUrl}}</text>
+  </view>
+</view>
