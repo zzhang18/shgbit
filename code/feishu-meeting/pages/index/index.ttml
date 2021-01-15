@@ -1,9 +1,9 @@
 <view class="intro">
   <view>
-    <text class="text">Test video conference with link</text>
-    <button bindtap="onItemClick">Open Chrome</button>
+    <text class="text">Redirecting to meeting</text>
+    <!-- <button bindtap="onItemClick">Open Chrome</button> -->
   </view>
-  <view>
+  <!-- <view>
     <text class="text">User nickname: {{user.nickName}}</text>
   </view>
   <view>
@@ -13,6 +13,6 @@
     <text class="text">Meeting: {{meetingId}}</text>
   </view>
   <view>
-    <text class="text">Url: {{finalUrl}}</text>
-  </view>
+    <text class="text">Url: {{url}}</text>
+  </view> -->
 </view>
